@@ -1,0 +1,50 @@
+{
+  "name": "query-params-kit",
+  "version": "1.0.0",
+  "description": "Framework-agnostic utilities for extracting query parameters",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown && npm pkg set types=./dist/index.d.ts",
+    "prepack": "npm run build",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "query",
+    "query-params",
+    "url",
+    "urlsearchparams",
+    "typescript"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "tsdown": "^0.21.10",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  }
+}
