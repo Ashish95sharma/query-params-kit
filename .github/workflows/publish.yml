@@ -12,6 +12,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -27,8 +28,6 @@ jobs:
       - run: npm run test:run
 
       - name: Publish to npm
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           NAME=$(node -p "require('./package.json').name")
           VERSION=$(node -p "require('./package.json').version")
@@ -36,10 +35,6 @@ jobs:
           if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
             echo "Version $VERSION is already on npm. Skipping publish."
             exit 0
-          fi
-
-          if [ -n "$NPM_TOKEN" ]; then
-            export NODE_AUTH_TOKEN="$NPM_TOKEN"
           fi
 
           npm publish --access public
