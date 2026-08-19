@@ -1,6 +1,6 @@
 {
   "name": "query-params-kit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Framework-agnostic utilities for extracting URL query parameters, including duplicate keys",
   "author": "Ashish Sharma",
   "type": "module",

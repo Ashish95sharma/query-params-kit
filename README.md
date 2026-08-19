@@ -4,34 +4,38 @@ Framework-agnostic utilities for reading URL query parameters.
 
 Works in Node.js and the browser. Ships ESM and CommonJS, with TypeScript types included. No runtime dependencies.
 
-## Install
+## Getting started
 
 ```bash
 npm install query-params-kit
 ```
 
-## Usage
-
 ```ts
 import { getAllQueryParams } from "query-params-kit";
 
-getAllQueryParams("?name=Ashish&role=developer");
+const params = getAllQueryParams("?name=Ashish&role=developer");
 // { name: "Ashish", role: "developer" }
+```
 
+## Usage
+
+Duplicate keys are collected into arrays:
+
+```ts
 getAllQueryParams("?userId=123&userId=456&userId=789");
 // { userId: ["123", "456", "789"] }
+```
+
+You can pass a query string (with or without `?`) or `URLSearchParams`:
+
+```ts
+getAllQueryParams("name=Ashish&role=developer");
 
 getAllQueryParams(new URLSearchParams("userId=123&status=active"));
 // { userId: "123", status: "active" }
 
 getAllQueryParams("?name=Ashish%20Kumar&city=New%20Delhi");
 // { name: "Ashish Kumar", city: "New Delhi" }
-```
-
-A leading `?` is optional:
-
-```ts
-getAllQueryParams("name=Ashish&role=developer");
 ```
 
 ## API
@@ -46,10 +50,8 @@ Parses a query string or `URLSearchParams` into a plain object.
 
 **Returns:** `QueryParams` — `Record<string, string | string[]>`
 
-Behavior:
-
-- Unique keys are returned as strings
-- Duplicate keys are returned as arrays, in the order they appear
+- Unique keys are strings
+- Duplicate keys become arrays, in the order they appear
 - Percent-encoded values are decoded
 - Empty values are kept as `""`
 - An empty input returns `{}`
