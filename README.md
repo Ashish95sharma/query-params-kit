@@ -54,7 +54,7 @@ Parses a query string or `URLSearchParams` into a plain object.
 - Duplicate keys become arrays, in the order they appear
 - Percent-encoded values are decoded
 - Empty values are kept as `""`
-- An empty input returns `{}`
+- An empty input returns `{ }`
 
 ```ts
 getAllQueryParams("?name=&status=active");
